@@ -52,49 +52,47 @@ def sumsquares(x):
 	n = x.shape[0]
 	return np.sum([i*x[i-1]**2 for i in range(1, n+1)])
 
-digits = 4
-
 functions = {
 		'Ackley': {
 						'fitness_function': ackley, 
 						'domains': (-10, 10), 
 						'optimizer': min
 						},
-		'Levy': {
-						'fitness_function': levy, 
-						'domains': (-10, 10),	
-						'optimizer': min
-						},
-		'Quadric': {
-						'fitness_function': quadric, 
-						'domains': (-10, 10), 
-						'optimizer': min
-						},
-		'Rastrigin': {
-						'fitness_function': rastrigin, 
-						'domains': (-5.12, 5.12), 
-						'optimizer': min
-						},
-		'Rosenbrock': {
-						'fitness_function': rosenbrock, 
-						'domains': (-5, 10), 
-						'optimizer': min
-						},
-		'Schwefel': {
-						'fitness_function': schwefel, 
-						'domains': (-10, 10), 
-						'optimizer': min
-						},
-		'Sphere': {
-						'fitness_function': sphere, 
-						'domains': (-10, 10), 
-						'optimizer': min
-						},
-		'SumSquares': {
-						'fitness_function': sumsquares, 
-						'domains': (-10, 10), 
-						'optimizer': min
-						}
+		# 'Levy': {
+		# 				'fitness_function': levy, 
+		# 				'domains': (-10, 10),	
+		# 				'optimizer': min
+		# 				},
+		# 'Quadric': {
+		# 				'fitness_function': quadric, 
+		# 				'domains': (-10, 10), 
+		# 				'optimizer': min
+		# 				},
+		# 'Rastrigin': {
+		# 				'fitness_function': rastrigin, 
+		# 				'domains': (-5.12, 5.12), 
+		# 				'optimizer': min
+		# 				},
+		# 'Rosenbrock': {
+		# 				'fitness_function': rosenbrock, 
+		# 				'domains': (-5, 10), 
+		# 				'optimizer': min
+		# 				},
+		# 'Schwefel': {
+		# 				'fitness_function': schwefel, 
+		# 				'domains': (-10, 10), 
+		# 				'optimizer': min
+		# 				},
+		# 'Sphere': {
+		# 				'fitness_function': sphere, 
+		# 				'domains': (-10, 10), 
+		# 				'optimizer': min
+		# 				},
+		# 'SumSquares': {
+		# 				'fitness_function': sumsquares, 
+		# 				'domains': (-10, 10), 
+		# 				'optimizer': min
+		# 				}
 		}
 
 parameter = {
@@ -103,15 +101,17 @@ parameter = {
 		'pairing': ['random'], 
 		# 'domains': (min, max), defualt (0, 100) 
 		'n_population': [500], 
-		'dimension': [10], #, 20
+		'dimension': [100], #, 20
 		# 'n_sample': [500],
 		'function': functions.keys()
 }	 
 
-k_nearest_neighbors = [10, 20, 50] # 10, 20, 
+k_nearest_neighbors = [20, 50] # 10, 20, 
 
 iteration = 20
-time = 7200
+all_time = 1 * 10
+fst_time = 1 * 2
+lst_time = 1 * 3
 		
 parameters = [{}]
 
@@ -146,11 +146,11 @@ def genetic_algorithm_report(columns):
 		GA_page_rank.set_selection('page_rank')
 		GA_page_rank.set_cache_param()
 
-		log_page_rank = GA_page_rank.optimize_by_iterations(initial_population, iteration)
+		log_page_rank = GA_page_rank.optimize_by_time_hybrid(initial_population, all_time, 'tournament', fst_time, 100, 10, 'page_rank', lst_time)
 		# log_page_rank = GA_page_rank.optimize_by_time(initial_population, time)
 		logs.append(log_page_rank)
 
-	log_basic = GA_tournament.optimize_by_iterations(initial_population, iteration)
+	log_basic = GA_tournament.optimize_by_time(initial_population, all_time)
 	# log_basic = GA_tournament.optimize_by_time(initial_population, time)
 	
 	logs = [log_basic] + logs
