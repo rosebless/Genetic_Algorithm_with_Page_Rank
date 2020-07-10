@@ -109,9 +109,9 @@ parameter = {
 k_nearest_neighbors = [20, 50] # 10, 20, 
 
 iteration = 20
-all_time = 1 * 10
-fst_time = 1 * 2
-lst_time = 1 * 3
+all_time = 3600 * 10
+fst_time = 3600 * 2
+lst_time = 3600 * 3
 		
 parameters = [{}]
 
