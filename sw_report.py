@@ -166,7 +166,7 @@ avg_columns = []
 selections = ['tournament'] 
 
 for knn in k_nearest_neighbors:
-	selections.append('page_rank k={:}'.format(knn))
+	selections.append('hybrid page_rank k={:}'.format(knn))
 
 for selection in selections:
 		for key in ['time', 'generation', 'optimal', 'log']: 
